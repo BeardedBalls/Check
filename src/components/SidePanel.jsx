@@ -1,23 +1,41 @@
-// SidePanel.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { browserLocalPersistence, setPersistence } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebaseConfig'; // Adjust the import path as needed
+import './SidePanel.css'; // Import the CSS file
 
-function SidePanel(){
-  return(    
-    <div style={{ width: '200px', height: '100vh', background: '#f0f0f0', padding: '10px', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
+const SidePanel = () => {
+  const navigate = useNavigate(); // For navigation after logout
+
+  const handleLogout = async () => {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      await signOut(auth); // Sign out the user from Firebase
+      navigate('/'); // Redirect to login page after signing out
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Handle logout error (e.g., show a message to the user)
+    }
+  };
+
+  return (
+    <div className="side-panel">
       <Link to="/admin/profile">
-        <button style={{ width: '100%', padding: '10px', marginBottom: '5px' }}>Profile</button>
+        <br/><button>Profile</button>
       </Link>
       <Link to="/admin/dashboard">
-        <button style={{ width: '100%', padding: '10px', marginBottom: '5px' }}>Dashboard</button>
+        <button>Dashboard</button>
       </Link>
       <Link to="/admin/client">
-        <button style={{ width: '100%', padding: '10px', marginBottom: '5px' }}>Client</button>
+        <button>Client</button>
       </Link>
       <Link to="/admin/billing">
-        <button style={{ width: '100%', padding: '10px' }}>Billing</button>
+        <button>Billing</button>
       </Link>
+      <button className="logout-button" onClick={handleLogout}>Logout</button>
     </div>
-  )
+  );
 }
+
 export default SidePanel;

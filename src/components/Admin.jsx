@@ -5,21 +5,25 @@ import Dashboard from './Dashboard';
 import Client from './Client';
 import Billing from './Billing';
 import Profile from './Profile';
+import './Admin.css'; // Import the CSS file
 
-function Admin(){
-    return(
-            <div style={{ display: 'flex' }}>
-            <SidePanel />
-            <div style={{ flex: 1, padding: '20px' }}>
-                <Routes>
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/client" element={<Client />} />
-                <Route path="/billing" element={<Billing />} />
-                <Route path="/" element={<Dashboard />} /> {/* Default route */}
-                </Routes>
-            </div>
-            </div>
-)
+function Admin() {
+  return (
+    <div className="admin-container">
+      <div className="side-panel">
+        <SidePanel />
+      </div>
+      <div className="content">
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/client" element={<Client />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path="/" element={<Dashboard />} /> {/* Default route */}
+        </Routes>
+      </div>
+    </div>
+  );
 }
+
 export default Admin;
