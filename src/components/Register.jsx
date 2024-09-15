@@ -7,7 +7,8 @@ import './Register.css'; // Import the CSS file
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    lastName: '',
+    firstName:'',
     address: '',
     phoneNumber: '',
     meterNumber: '',
@@ -40,7 +41,8 @@ const Register = () => {
 
       // Save additional user data to Firestore
       await setDoc(doc(firestore, 'users', user.uid), {
-        fullName: formData.fullName,
+        lastName: formData.lastName,
+        firstName: formData.firstName,
         address: formData.address,
         phoneNumber: formData.phoneNumber,
         meterNumber: formData.meterNumber,
@@ -62,18 +64,33 @@ const Register = () => {
 
         {error && <p className="error">{error}</p>}
 
-        <div className="inputContainer">
-          <label htmlFor="fullName" className="label">Full Name:</label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-            className="input"
-          />
+        <div className="inputGroup">
+          <div className="inputContainer">
+            <label htmlFor="lastName" className="label">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+              className="input"
+            />
+          </div>
+          <div className="inputContainer">
+            <label htmlFor="firstName" className="label">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+              className="input"
+            />
+          </div>
         </div>
+
         <div className="inputContainer">
           <label htmlFor="address" className="label">Address:</label>
           <input
@@ -147,6 +164,15 @@ const Register = () => {
           />
         </div>
         <button type="submit" className="button">Register</button>
+        <a
+              href="#"
+              className="forgot-password-link"
+              onClick={(e) => {
+                navigate('/')
+              }}
+            >
+              Back to Login
+            </a>
       </form>
     </div>
   );

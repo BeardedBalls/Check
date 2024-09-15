@@ -30,8 +30,8 @@ const SidePanel = () => {
       <Link to="/admin/client">
         <button>Client</button>
       </Link>
-      <Link to="/admin/billing">
-        <button>Billing</button>
+      <Link to="/admin/reciept">
+        <button>Reciept</button>
       </Link>
       <button className="logout-button" onClick={handleLogout}>Logout</button>
     </div>

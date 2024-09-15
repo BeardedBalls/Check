@@ -50,9 +50,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit} className="form">
-        <h2 className="header">Login</h2>
+    <div className="container1">
+      <form onSubmit={handleSubmit} className="form1">
+        <h2 className="header1">Login</h2>
         {error && <p className="error">{error}</p>}
         {!showReset ? (
           <>
